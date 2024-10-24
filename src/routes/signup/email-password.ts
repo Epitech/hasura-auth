@@ -5,6 +5,7 @@ import { UserRegistrationOptionsWithRedirect } from '@/types';
 import { ENV, getSignInResponse, getUserByEmail } from '@/utils';
 import { createUserAndSendVerificationEmail } from '@/utils/user/email-verification';
 import { Joi, email, registrationOptions } from '@/validation';
+import {logger} from "../../logger"
 
 export const signUpEmailPasswordSchema = Joi.object({
   email: email.required(),
@@ -24,14 +25,17 @@ export const signUpEmailPasswordHandler: RequestHandler<
   const { body } = req;
   const { email, options } = body;
 
+  logger.info(`Checking if admin before doing anything`);
   if (req.auth?.defaultRole != 'admin') {
     return sendError(res, 'route-not-found');
   }
 
+  logger.info(`Exit if signups are disabled`);
   if (ENV.AUTH_DISABLE_SIGNUP) {
     return sendError(res, 'signup-disabled');
   }
 
+  logger.info(`Checking if email is already in use`);
   // check if email already in use by some other user
   if (await getUserByEmail(email)) {
     return sendError(res, 'email-already-in-use');

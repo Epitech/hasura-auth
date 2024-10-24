@@ -8,6 +8,7 @@ import { sendEmail } from '@/email';
 import { createEmailRedirectionLink } from '../redirect';
 import { getUserByEmail } from './getters';
 import { UserQuery } from '../__generated__/graphql-request';
+import { logger } from '../../logger';
 
 const sendEmailIfNotVerified = async ({
   email,
@@ -24,6 +25,7 @@ const sendEmailIfNotVerified = async ({
   ticket?: string | null;
   redirectTo: string;
 }) => {
+  logger.info(`Checking if any setting might interfere with email sending`);
   if (
     !ENV.AUTH_DISABLE_NEW_USERS &&
     ENV.AUTH_EMAIL_SIGNIN_EMAIL_VERIFIED_REQUIRED &&
@@ -34,11 +36,13 @@ const sendEmailIfNotVerified = async ({
     }
 
     const template = 'email-verify';
+    logger.info(`Creating email redirection link`);
     const link = createEmailRedirectionLink(
       EMAIL_TYPES.VERIFY,
       ticket,
       redirectTo
     );
+    logger.info(`Sending email`);
     await sendEmail({
       template,
       message: {
@@ -94,6 +98,8 @@ export const createUserAndSendVerificationEmail = async (
   } = options;
 
   const existingUser = await getUserByEmail(email);
+
+  logger.info(`Checking if used exists before sending verification email`);
 
   if (existingUser) {
     await sendEmailIfNotVerified({
