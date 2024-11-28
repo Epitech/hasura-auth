@@ -891,10 +891,24 @@
                   "example" : "Str0ngPassw#ord-94|%",
                   "minLength" : 3,
                   "type" : "string"
+               },
+               "firstName" : {
+                  "description" : "The first name of the user",
+                  "example" : "John",
+                  "minLength" : 2,
+                  "type" : "string"
+               },
+               "lastName" : {
+                  "description" : "The last name of the user",
+                  "example" : "Smith",
+                  "minLength" : 2,
+                  "type" : "string"
                }
             },
             "required" : [
                "email",
+               "firstName",
+               "lastName",
                "password"
             ],
             "type" : "object"

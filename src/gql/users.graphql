@@ -21,6 +21,8 @@ fragment userFields on users {
   roles {
     role
   }
+  firstName
+  lastName
 }
 
 query user($id: uuid!) {

@@ -81,6 +81,8 @@ const sendEmailIfNotVerified = async ({
 
 export const createUserAndSendVerificationEmail = async (
   email: string,
+  first_name: string,
+  last_name: string,
   options: UserRegistrationOptionsWithRedirect,
   password?: string
 ) => {
@@ -133,6 +135,8 @@ export const createUserAndSendVerificationEmail = async (
       data: allowedRoles.map((role: string) => ({ role })),
     },
     metadata,
+    firstName: first_name,
+    lastName: last_name,
   });
 
   await sendEmailIfNotVerified({
