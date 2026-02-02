@@ -1,12 +1,12 @@
-FROM node:18 AS build
+FROM node:18-slim AS build
 
 WORKDIR /app
 
 RUN npm i -g pnpm
 
 COPY ./package.json ./pnpm-lock.yaml ./
-RUN pnpm i
+RUN pnpm install --frozen-lockfile
 COPY ./ ./
 RUN pnpm build
 
-CMD pnpm start
+CMD [ "pnpm", "start" ]
