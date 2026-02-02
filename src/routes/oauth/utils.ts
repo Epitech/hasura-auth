@@ -95,7 +95,7 @@ export const preRequestProviderMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  const provider = req.params.provider;
+  const provider = req.params.provider as string;
   const middleware = PROVIDERS_CONFIG[provider]?.middleware;
   if (middleware) {
     return middleware(req, res, next);
