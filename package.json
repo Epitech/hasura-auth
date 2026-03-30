@@ -25,7 +25,7 @@
   "dependencies": {
     "@djgrant/postgres-migrations": "4.1.0-rc.1",
     "@simplewebauthn/server": "^9.0.3",
-    "axios": "^1.13.4",
+    "axios": "^1.13.5",
     "bcryptjs": "^2.4.3",
     "compare-urls": "^2.0.0",
     "cors": "2.8.5",
