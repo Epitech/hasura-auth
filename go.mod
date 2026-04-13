@@ -1,10 +1,9 @@
 module github.com/nhost/hasura-auth
 
-go 1.22
-toolchain go1.22.5
+go 1.22.5
 
 require (
-	github.com/getkin/kin-openapi v0.124.0
+	github.com/getkin/kin-openapi v0.131.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-webauthn/webauthn v0.10.2
 	github.com/gobwas/glob v0.2.3
@@ -40,7 +39,6 @@ require (
 	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/google/go-tpm v0.9.0 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
-	github.com/invopop/yaml v0.3.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20231201235250-de7065d80cb9 // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
@@ -54,6 +52,8 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
+	github.com/oasdiff/yaml v0.0.0-20250309154309-f31be36b4037 // indirect
+	github.com/oasdiff/yaml3 v0.0.0-20250309153720-d2182401db90 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
