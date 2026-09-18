@@ -72,11 +72,11 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       joi:
-        specifier: ^17.13.3
-        version: 17.13.3
+        specifier: ^17.13.6
+        version: 17.13.6
       joi-to-swagger:
         specifier: ^6.2.0
-        version: 6.2.0(joi@17.13.3)
+        version: 6.2.0(joi@17.13.6)
       jose:
         specifier: ^5.10.0
         version: 5.10.0
@@ -4085,8 +4085,8 @@ packages:
     peerDependencies:
       joi: '>=17.1.1'
 
-  joi@17.13.3:
-    resolution: {integrity: sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==}
+  joi@17.13.6:
+    resolution: {integrity: sha512-ImNZaq/LSysofih+xIGYfR0WUXMA9GLUNB//YTCSrZptoRmVgaNAdJyi6K1kXi9pkLEoSkoI8I4UwtNiu/D7nw==}
 
   jose@4.15.9:
     resolution: {integrity: sha512-1vUQX+IdDMVPj4k8kOxgUqlcK518yluMuGZwqlr44FS1ppZB/5GWh4rZG89erpOBOJjU/OBsnCVFfapsRz6nEA==}
@@ -11478,12 +11478,12 @@ snapshots:
 
   jju@1.4.0: {}
 
-  joi-to-swagger@6.2.0(joi@17.13.3):
+  joi-to-swagger@6.2.0(joi@17.13.6):
     dependencies:
-      joi: 17.13.3
+      joi: 17.13.6
       lodash: 4.17.23
 
-  joi@17.13.3:
+  joi@17.13.6:
     dependencies:
       '@hapi/hoek': 9.3.0
       '@hapi/topo': 5.1.0
