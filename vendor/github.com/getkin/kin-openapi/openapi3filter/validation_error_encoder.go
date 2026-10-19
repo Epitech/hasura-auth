@@ -117,16 +117,24 @@ func convertParseError(e *RequestError, innerErr *ParseError) *ValidationError {
 		}
 	} else if innerErr.RootCause() != nil {
 		if rootErr, ok := innerErr.Cause.(*ParseError); ok &&
-			rootErr.Kind == KindInvalidFormat && e.Parameter.In == "query" {
+			rootErr.Kind == KindInvalidFormat && e.Parameter != nil && e.Parameter.In == "query" {
 			return &ValidationError{
 				Status: http.StatusBadRequest,
 				Title: fmt.Sprintf("parameter %q in %s is invalid: %v is %s",
 					e.Parameter.Name, e.Parameter.In, rootErr.Value, rootErr.Reason),
 			}
 		}
+		// For body parse errors (e.Parameter == nil) the outer ParseError's
+		// Reason is often empty, e.g. the multipart decoder wraps a part's
+		// *ParseError without setting one. Fall back to the full error text so
+		// the response still carries a meaningful message.
+		title := innerErr.Reason
+		if title == "" {
+			title = innerErr.Error()
+		}
 		return &ValidationError{
 			Status: http.StatusBadRequest,
-			Title:  innerErr.Reason,
+			Title:  title,
 		}
 	}
 	return nil
@@ -160,13 +168,13 @@ func convertSchemaError(e *RequestError, innerErr *openapi3.SchemaError) *Valida
 	if innerErr.SchemaField == "enum" {
 		enums := make([]string, 0, len(innerErr.Schema.Enum))
 		for _, enum := range innerErr.Schema.Enum {
-			enums = append(enums, fmt.Sprintf("%v", enum))
+			enums = append(enums, fmt.Sprint(enum))
 		}
 		cErr.Detail = fmt.Sprintf("value %v at %s must be one of: %s",
 			innerErr.Value,
 			toJSONPointer(innerErr.JSONPointer()),
 			strings.Join(enums, ", "))
-		value := fmt.Sprintf("%v", innerErr.Value)
+		value := fmt.Sprint(innerErr.Value)
 		if e.Parameter != nil &&
 			(e.Parameter.Explode == nil || *e.Parameter.Explode) &&
 			(e.Parameter.Style == "" || e.Parameter.Style == "form") &&
